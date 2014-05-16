@@ -1,0 +1,18 @@
+{
+  "name": "cw-autosize-input",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master"
+  },
+  "homepage": "https://github.com/cletusw/cw-autosize-input",
+  "_release": "5f95da9fac",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5f95da9fac7968e842f87cbb69303fc605a3219f"
+  },
+  "_source": "git://github.com/cletusw/cw-autosize-input.git",
+  "_target": "master",
+  "_originalSource": "cletusw/cw-autosize-input",
+  "_direct": true
+}

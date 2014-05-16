@@ -1,0 +1,7 @@
+{
+  "name": "cw-autosize-input",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master"
+  }
+}
