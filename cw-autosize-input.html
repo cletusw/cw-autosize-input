@@ -7,7 +7,9 @@ A form input web component that dynamically resizes itself based on its content.
 
     <input is="cw-autosize-input" type="text" placeholder="Start typing">
 
-Use the CSS `min-width` and `max-width` properties to control the amount of growing.
+Use the CSS `min-width` and `max-width` properties to control the auto-growing.
+If no `min-width` is specified, it will default to the computed value of
+`width`, which may be specified by the user agent.
 
 @element cw-autosize-input
 @extends input
@@ -20,10 +22,17 @@ Use the CSS `min-width` and `max-width` properties to control the amount of grow
     Polymer({
 
       attached: function() {
-        this.style.width = '0';
+        var computedStyles = getComputedStyle(this);
+        var minWidth = computedStyles.getPropertyValue('min-width');
+        var width = computedStyles.getPropertyValue('width');
+
+        // Provide default value for min-width to prevent shrinking on first character input
+        if (minWidth === '0px') {
+          this.style.minWidth = width;
+        }
 
         // Copy styles from input to mirror
-        this.mirror.style.cssText = getComputedStyle(this).cssText;
+        this.mirror.style.cssText = computedStyles.cssText;
 
         this.mirror.style.position = 'absolute';
         this.mirror.style.top = '-999px';
@@ -33,6 +42,8 @@ Use the CSS `min-width` and `max-width` properties to control the amount of grow
         this.mirror.style['white-space'] = 'pre';
 
         document.body.appendChild(this.mirror);
+
+        this.onInput();
       },
 
       detached: function() {
