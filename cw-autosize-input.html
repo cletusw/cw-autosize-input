@@ -1,11 +1,11 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-An input type="text" that dynamically resizes itself based on its content.
+A form input web component that dynamically resizes itself based on its content.
 
 ##### Example
 
-    <input is="cw-autosize-input" type="text" placeholder="Start typing"></cw-autosize-input>
+    <input is="cw-autosize-input" type="text" placeholder="Start typing">
 
 Use the CSS `min-width` and `max-width` properties to control the amount of growing.
 
@@ -45,7 +45,6 @@ Use the CSS `min-width` and `max-width` properties to control the amount of grow
 
       onInput: function() {
         this.mirror.innerText = this.value + '   ';
-        console.log(this.clientWidth);
         this.style.width = this.mirror.clientWidth + 'px';
       }
 
