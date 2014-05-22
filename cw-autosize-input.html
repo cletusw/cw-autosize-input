@@ -22,6 +22,18 @@ If no `min-width` is specified, it will default to the computed value of
     Polymer({
 
       attached: function() {
+        this.mirrorStyles();
+
+        document.body.appendChild(this.mirror);
+
+        this.onInput();
+      },
+
+      detached: function() {
+        document.body.removeChild(this.mirror);
+      },
+
+      mirrorStyles: function() {
         var computedStyles = getComputedStyle(this);
         var minWidth = computedStyles.getPropertyValue('min-width');
         var width = computedStyles.getPropertyValue('width');
@@ -40,14 +52,6 @@ If no `min-width` is specified, it will default to the computed value of
         this.mirror.style.padding = '0';
         this.mirror.style.width = '';
         this.mirror.style['white-space'] = 'pre';
-
-        document.body.appendChild(this.mirror);
-
-        this.onInput();
-      },
-
-      detached: function() {
-        document.body.removeChild(this.mirror);
       },
 
       ready: function() {
