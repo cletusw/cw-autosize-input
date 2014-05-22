@@ -37,6 +37,11 @@ If no `min-width` is specified, it will default to the computed value of
         document.body.removeChild(this.mirror);
       },
 
+      inputValueChanged: function() {
+        this.mirror.innerText = this.inputValue + '   ';
+        this.style.width = this.mirror.clientWidth + 'px';
+      },
+
       mirrorStyles: function() {
         var computedStyles = getComputedStyle(this);
         var minWidth = computedStyles.getPropertyValue('min-width');
@@ -60,11 +65,6 @@ If no `min-width` is specified, it will default to the computed value of
 
       ready: function() {
         this.mirror = document.createElement('span');
-      },
-
-      inputValueChanged: function() {
-        this.mirror.innerText = this.inputValue + '   ';
-        this.style.width = this.mirror.clientWidth + 'px';
       }
 
     });
