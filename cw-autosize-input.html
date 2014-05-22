@@ -15,18 +15,22 @@ If no `min-width` is specified, it will default to the computed value of
 @extends input
 @homepage http://cletusw.github.io/cw-autosize-input
 -->
-<polymer-element name="cw-autosize-input" extends="input" on-input="{{onInput}}">
+<polymer-element name="cw-autosize-input" extends="input" attributes="inputValue" on-input="{{onInput}}">
 
   <script>
 
     Polymer({
 
+      inputValue: '',
+
       attached: function() {
+        this.bind('value', new PathObserver(this, 'inputValue'));
+
         this.mirrorStyles();
 
         document.body.appendChild(this.mirror);
 
-        this.onInput();
+        this.inputValueChanged();
       },
 
       detached: function() {
@@ -58,8 +62,8 @@ If no `min-width` is specified, it will default to the computed value of
         this.mirror = document.createElement('span');
       },
 
-      onInput: function() {
-        this.mirror.innerText = this.value + '   ';
+      inputValueChanged: function() {
+        this.mirror.innerText = this.inputValue + '   ';
         this.style.width = this.mirror.clientWidth + 'px';
       }
 
