@@ -15,13 +15,34 @@ If no `min-width` is specified, it will default to the computed value of
 @extends input
 @homepage http://cletusw.github.io/cw-autosize-input
 -->
-<polymer-element name="cw-autosize-input" extends="input" on-input="{{onInput}}">
+<polymer-element name="cw-autosize-input" extends="input" attributes="inputValue" on-input="{{onInput}}">
 
   <script>
 
     Polymer({
 
+      inputValue: '',
+
       attached: function() {
+        this.bind('value', new PathObserver(this, 'inputValue'));
+
+        this.mirrorStyles();
+
+        document.body.appendChild(this.mirror);
+
+        this.inputValueChanged();
+      },
+
+      detached: function() {
+        document.body.removeChild(this.mirror);
+      },
+
+      inputValueChanged: function() {
+        this.mirror.innerText = this.inputValue + '   ';
+        this.style.width = this.mirror.clientWidth + 'px';
+      },
+
+      mirrorStyles: function() {
         var computedStyles = getComputedStyle(this);
         var minWidth = computedStyles.getPropertyValue('min-width');
         var width = computedStyles.getPropertyValue('width');
@@ -40,23 +61,10 @@ If no `min-width` is specified, it will default to the computed value of
         this.mirror.style.padding = '0';
         this.mirror.style.width = '';
         this.mirror.style['white-space'] = 'pre';
-
-        document.body.appendChild(this.mirror);
-
-        this.onInput();
-      },
-
-      detached: function() {
-        document.body.removeChild(this.mirror);
       },
 
       ready: function() {
         this.mirror = document.createElement('span');
-      },
-
-      onInput: function() {
-        this.mirror.innerText = this.value + '   ';
-        this.style.width = this.mirror.clientWidth + 'px';
       }
 
     });

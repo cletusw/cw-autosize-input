@@ -1,0 +1,8 @@
+{
+  "name": "cw-autosize-input#gh-pages",
+  "dependencies": {
+    "cw-autosize-input": "cletusw/cw-autosize-input#master",
+    "polymer": "Polymer/polymer#master"
+  }
+}
+
